@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import '../App.css';
-import { Button,Input} from "antd";
+import { Button,Input, Popover} from "antd";
 import axios from "./axios";
-import { SendOutlined } from '@ant-design/icons';
+import { SendOutlined ,EllipsisOutlined  } from '@ant-design/icons';
 
 function QuestionLayout (props){
 
@@ -17,13 +17,26 @@ function QuestionLayout (props){
         }, 1000);
     },[]);
 
+    const content = (
+        <>
+        <Input type="text" placeholder="Type Answer Here" />
+        <Button type="primary">Answer</Button>
+        </>
+    )
 
     return(
         <div className="chat-body">
             <div className="chatBubble-body">{questions.map((data) => (
                 <p className="chatBubble">
-                    <p>{data.senderId}</p>
+                    <div className="chat-bubble-button">
+                    {/* <p>{data.name}</p> */}
                     <p>{data.text}</p>
+                    <Popover
+                        content={content}
+                        trigger="click">
+                    <EllipsisOutlined />
+                    </Popover>
+                    </div>
                 </p>
             ))}
 

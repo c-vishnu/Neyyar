@@ -5,8 +5,7 @@ import  "./videoClass";
 import {Button,
         Space,
         Badge,
-        Menu,
-        Dropdown} from 'antd';
+        Popover} from 'antd';
 import {AudioOutlined,
   AudioMutedOutlined,
     VideoCameraOutlined,
@@ -15,7 +14,7 @@ import {AudioOutlined,
     EllipsisOutlined,
     TeamOutlined  } from '@ant-design/icons';
 
-function FooterLayout(props) {
+const FooterLayout = (props) => {
 
   const[toggleList, setToggleList] = useState(false);
   const toggleListName = () =>{
@@ -28,49 +27,37 @@ function FooterLayout(props) {
   const setEnableVideoButton = () => {
     props.setEnableVideo(!props.enableVideo)
   }
-
-  const setEnableMicButton = () =>{
-    props.setEnableMic(!props.enableMic)
-  }
-
   const setEnableScreenSharing = () => {
     props.setScreenSharing(!props.screenSharing)
   }
-
-  const menu =(
-    <Menu items={[
-      {
-        label: (
-          <a>Student 1</a>
-        ),
-      },
-      {
-        label: (
-          <a>Student 2</a>
-        ), 
-      },
-      {
-        label: (
-          <a>Student 2</a>
-        ), 
-      },
-    ]}/>
-  );
+  // const setEnableMicButton = () =>{
+  //   props.setEnableMic(!props.enableMic)
+  // }
+const content  = (
+  <>
+  <a>John</a><br/>
+  <a>Emilie</a><br/>
+  <a>Fred</a>
+  </>
+)
 
 
   return (
     <div className="grid-footer">
       <Space className="button-array">
-        <Button shape="circle" size="large" icon={mic?<AudioOutlined />:<AudioMutedOutlined />} onClick={setmicEnable}/>
+        <Button shape="circle" size="large" icon={mic?<AudioOutlined />:<AudioMutedOutlined />}  onClick={setmicEnable}/>
         <Button shape="circle" size="large" icon={<VideoCameraOutlined/>} onClick={setEnableVideoButton}/>
         <Button shape="circle" size="large" icon={<ArrowUpOutlined />} onClick={setEnableScreenSharing}/>
         <Button shape="circle" size="large" icon={<EllipsisOutlined />} />
         <Button shape="circle" size="large" icon={<DesktopOutlined />} />
       </Space>
       <Space className={`${props.smallLayout ? "live-center-button" : "button-live"}`}>
-        <Dropdown overlay={menu} placement="top" arrow>
-        <Button shape="circle" size="large" icon={toggleList?<TeamOutlined />:<Badge count={3}><TeamOutlined /></Badge>} onClick={toggleListName}/>
-        </Dropdown>
+      <Popover
+        content={content}
+        title ="Participants"
+        trigger="click">
+        <Button shape="circle" size="large" icon={toggleList?<TeamOutlined />:<Badge count={1}><TeamOutlined /></Badge>} onClick={toggleListName}/>
+        </Popover>
       </Space>
     </div>
   );

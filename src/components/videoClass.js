@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../App.css";
 
-function VideoClass(props) {
+const VideoClass =(props) =>{
   const CAMERA_CONSTRAINTS = {
     audio: true,
     video: true,
@@ -312,12 +312,12 @@ function VideoClass(props) {
     mediaRecorderRef.current.start(1000);
   };
 
-  const mute = function () {
+  const mute = () => {
     if (inputStreamRef.current.getAudioTracks().length > 0) {
       inputStreamRef.current.getAudioTracks()[0].enabled = false;
     }
   };
-  const unmute = function () {
+  const unmute = () => {
     if (inputStreamRef.current.getAudioTracks().length > 0) {
       inputStreamRef.current.getAudioTracks()[0].enabled = true;
     }
@@ -335,21 +335,21 @@ function VideoClass(props) {
     props.enableVideo ? enableCamera() : stopEnableCameras();
   }, [props.enableVideo]);
 
-//   useEffect(() => {
-//     props.enableMic ? mute() : unmute();
-//   }, [props.enableMic]);
-
   useEffect(() => {
     if (props.screenSharing) {
       screenRecord();
     }
   }, [props.screenSharing]);
 
+  // useEffect(() => {
+  //   props.enableMic ? unmute() : mute();
+  // }, [props.enableMic]);
+
   return (
     <div className={`${props.smallLayout ? "small-vid" : "videoLayout"}`}>
       <video ref={videoRef} muted playsInline></video>
-      {/* <button onClick={enableCamera}>Enable Camera</button>
-          <button onClick={stopEnableCameras}>Disable camera</button> */}
+       <button onClick={unmute}>Enable mic</button>
+          <button onClick={mute}>Disable mic</button>
     </div>
   );
 }

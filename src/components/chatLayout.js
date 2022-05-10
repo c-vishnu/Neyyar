@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import '../App.css';
-import { Button,Input} from "antd";
+import { Button,Input, Menu, Dropdown} from "antd";
 import { SendOutlined, EllipsisOutlined } from '@ant-design/icons';
 import axios from "./axios";
 import Picker from "emoji-picker-react";
 
-function ChatLayout (props){
+const ChatLayout = () => {
 
     const [messages, setMessage] = useState(["Demo message"]);
     //const dummy = useRef();
@@ -39,6 +39,20 @@ function ChatLayout (props){
         setPickerVisible(false);
     };
 
+    const menu =(
+        <Menu items={[
+          {
+            label: (
+              <a>Warn</a>
+            ),
+          },
+          {
+            label: (
+              <a>Block</a>
+            ), 
+          },
+        ]}/>
+      );
 
     return(
         <div className="chat-body">
@@ -52,7 +66,9 @@ function ChatLayout (props){
                             :`(${data.senderId})`}
                         </h4> 
                         {/* <h6>{data.dateTime}</h6> */}
-                        <EllipsisOutlined />
+                        <Dropdown overlay={menu} placement="top" arrow>
+                        <EllipsisOutlined /> 
+                        </Dropdown>
                      </div>
                     
                         <p style={{marginBottom: "0px"}}>{data.text}</p>

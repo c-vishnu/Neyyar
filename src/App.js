@@ -45,7 +45,10 @@ function App() {
       </Row>
       <Row>
         <Col span={24}>
-           <VideoClass smallLayout={child} enableVideo={enableVideo} screenSharing={screenSharing}/>
+           <VideoClass smallLayout={child} 
+           enableVideo={enableVideo} 
+           screenSharing={screenSharing}
+/>
         </Col>
       </Row>
       <Row>
